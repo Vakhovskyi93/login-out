@@ -1,0 +1,108 @@
+
+
+<nav>
+  <div class="nav-wrapper container">
+    <a href="#" class="brand-logo">Users board</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li  ><a href="badges.html"
+               routerLink="/login"
+      >Log in</a></li>
+      <li  ><a href="collapsible.html"
+               routerLink="/register"
+      >Sing In</a></li>
+
+    </ul>
+  </div>
+</nav>
+<div class="row container">
+  <form class="col s12"
+        [formGroup]="form"
+        (ngSubmit)="onSubmit()"
+  >
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="name"
+               type="text"
+               class="validate"
+               formControlName="name"
+
+        >
+        <label for="name">Name</label>
+        <span class="helper-text red-text"
+              *ngIf="form.get('name').invalid && form.get('name').touched"
+        >
+            <span *ngIf="form.get('name').errors['required']" >Введите Пароль</span>
+            <span *ngIf="form.get('name').errors['minlength'] && form.get('name').errors['minlength']['requiredLength']"
+            > Должен содержать минимум {{form.get('name').errors['minlength']['requiredLength']}} символов</span>
+        </span>
+
+
+
+
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="email"
+               type="email"
+               class="validate"
+               formControlName="email"
+               [ngClass]="{ 'invalid':form.get('email').invalid && form.get('email').touched }"
+
+        >
+        <label for="email">Email</label>
+        <span class="helper-text red-text"
+              *ngIf="form.get('email').invalid && form.get('email').touched"
+
+        >
+          <span *ngIf="form.get('email').errors['required']" >Введите Email</span>
+          <span *ngIf="form.get('email').errors['email']">Некоректный Email</span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="password"
+               type="password"
+               class="validate"
+               formControlName="password"
+               [ngClass]="{ 'invalid':form.get('password').invalid && form.get('password').touched }"
+
+        >
+        <label for="password">Password</label>
+        <span class="helper-text red-text"
+              *ngIf="form.get('password').invalid && form.get('password').touched"
+        >
+            <span *ngIf="form.get('password').errors['required']" >Введите Пароль</span>
+            <span *ngIf="form.get('password').errors['minlength'] && form.get('password').errors['minlength']['requiredLength']"
+            > Должен содержать минимум {{form.get('password').errors['minlength']['requiredLength']}} символов</span>
+        </span>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="passwordrepit"
+               type="password"
+               class="validate"
+               formControlName="passwordrepit"
+               [ngClass]="{ 'invalid':form.get('passwordrepit').invalid && form.get('passwordrepit').touched }"
+
+        >
+        <label for="passwordrepit">Password</label>
+        <span class="helper-text red-text"
+              *ngIf="(form.get('passwordrepit').touched ) && (form.get('password').value !== form.get('passwordrepit').value)"
+        >Пароли не совпадают
+            </span>
+      </div>
+    </div>
+    <button class="btn waves-effect waves-light  "
+            type="submit"
+            name="action"
+            [disabled]="form.invalid ||  (form.get('password').value !== form.get('passwordrepit').value) "
+    >Регистрация
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+
+</div>
